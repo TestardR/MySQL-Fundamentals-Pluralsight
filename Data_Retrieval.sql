@@ -282,3 +282,87 @@ WHERE first_name = 'KENNETH' AND actor_id < 100 OR last_name = 'TEMPLE';
 SELECT *
 FROM sakila.actor
 WHERE first_name = 'KENNETH' AND (actor_id < 100 OR last_name = 'TEMPLE');
+
+USE sakila;
+
+-- WHERE clause Comparison Operators
+-- IN 
+SELECT *
+FROM sakila.actor
+WHERE first_name IN ('NICK', 'JOHNNY', 'JOE', 'VIVIEN');
+
+SELECT *
+FROM sakila.actor
+WHERE actor_id IN (1,2,3,4,5);
+
+-- NOT insert
+SELECT *
+FROM sakila.actor
+WHERE actor_id NOT IN (1,2,3,4,5);
+
+-- In Subquery
+SELECT *
+FROM sakila.actor
+WHERE first_name IN  ('NICK', 'JOHNNY', 'JOE', 'VIVIEN')
+    OR actor_id IN 
+        (SELECT actor_id
+    FROM sakila.actor
+    WHERE last_name = 'DEGENERES');
+
+-- BETWEEN
+
+SELECT *
+FROM sakila.actor
+WHERE actor_id BETWEEN 1 AND 2;
+
+SELECT *
+FROM sakila.actor
+WHERE actor_id NOT BETWEEN 1 AND 2;
+
+
+
+-- LIKE
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'A%';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'AL%';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'A__E';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'A__E%';
+
+-- NULL
+
+SELECT *
+FROM sakila.address
+WHERE address2 IS NULL;
+
+SELECT *
+FROM sakila.address
+WHERE address2 IS NOT NULL;
+
+
+-- Limit Keyword
+
+SELECT *
+FROM sakila.actor
+ORDER BY actor_id;
+
+SELECT *
+FROM sakila.actor
+ORDER BY actor_id
+LIMIT 12;
+
+SELECT *
+FROM sakila
+.actor
+ORDER BY actor_id
+LIMIT 25, 5;
