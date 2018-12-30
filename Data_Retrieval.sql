@@ -426,4 +426,43 @@ WHERE actor_id IN (1,2,3,4,5);
     WHERE actor_id BETWEEN 1 AND 5;
 
 
--- DELETE Statement
+    -- DELETE Statement
+
+
+    USE sakila;
+
+    -- Delete Single Row
+    DELETE
+FROM sakila.actorsample
+WHERE actor_id = 1;
+    -- Check Data
+    SELECT *
+    FROM sakila.actorsample;
+
+    -- DELETE Multiple Rows
+    DELETE 
+FROM sakila.actorsample
+WHERE actor_id IN (3, 4, 5);
+    -- Check Data
+    SELECT *
+    FROM sakila.actorsample;
+
+    -- Delete using SELECT Statement (works the same with UPDATE)
+    DELETE
+FROM sakila.actorsample
+WHERE actor_id IN (SELECT actor_id
+    FROM film_actor
+    WHERE film_id = 1);
+    -- Check Data
+    SELECT *
+    FROM sakila.actorsample;
+
+    -- Delete all Rows from Table
+    DELETE
+FROM sakila.ActorSample;
+
+    -- Clean up
+    DROP TABLE ActorSample;
+
+
+
