@@ -366,3 +366,64 @@ FROM sakila
 .actor
 ORDER BY actor_id
 LIMIT 25, 5;
+
+
+USE sakila;
+
+-- Populate Sample Table
+CREATE TABLE ActorSample
+(
+    actor_id SMALLINT(5)
+    UNSIGNED NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR
+    (45) NOT NULL,
+    last_name VARCHAR
+    (45) NULL,
+    last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON
+    UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY
+    (actor_id)
+);
+
+    INSERT INTO sakila.actorsample
+        (first_name, last_name, last_update)
+    SELECT first_name, last_name, last_update
+    FROM sakila.actor;
+
+    -- Check Data
+    SELECT first_name fm
+    FROM sakila.actorsample
+    ORDER BY fm DESC;
+
+    -- Update Single Row Single Column
+    UPDATE sakila.ActorSample
+SET first_name='Romain'
+WHERE actor_id = 1;
+    UPDATE sakila.ActorSample
+SET first_name='Vanessa'
+WHERE actor_id = 2;
+
+    -- Update Multiple Rows Single Column
+    UPDATE sakila.actorsample
+SET first_name = 'Romano'
+WHERE actor_id IN (1,2,3,4,5);
+
+    -- Check Data
+    SELECT first_name
+    FROM sakila.actorsample
+    WHERE actor_id BETWEEN 1 AND 5;
+
+    -- Update Multiple Rows and Multiple Columns
+    UPDATE sakila.actorsample
+SET first_name = 'Romano',
+	last_name = 'Testard',
+	last_update = DEFAULT
+WHERE actor_id IN (1,2,3,4,5);
+
+    -- Check Data
+    SELECT first_name, last_name, last_update
+    FROM sakila.actorsample
+    WHERE actor_id BETWEEN 1 AND 5;
+
+
+-- DELETE Statement
